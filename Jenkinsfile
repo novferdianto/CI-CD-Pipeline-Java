@@ -14,6 +14,7 @@ pipeline {
         Name = readMavenPom().getName()
 
         NameFolder = "${env.BUILD_ID}" + '.' + "${ env.GIT_COMMIT[0..6]}"
+        DockerProjectName = ArtifactId.toLowerCase()
     }
 
     stages {
@@ -55,7 +56,7 @@ pipeline {
                 sh '''
                 curl -u admin:password -L "http://172.23.10.53:8081/service/rest/v1/search/assets/download?sort=version&repository=MyLab-RELEASE&maven.groupId=com.mylab&maven.artifactId=MyLab&maven.extension=war" -H "accept: application/json" --output latest.war
                 docker compose down
-                docker compose --project-name ${ArtifactId.toLowerCase()} build
+                docker compose --project-name ${DockerProjectName} build
                 docker compose up -d
                 '''
             }
