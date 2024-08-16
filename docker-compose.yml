@@ -1,0 +1,9 @@
+services:
+  java-apps:
+    build: .
+#      context: apps
+#      dockerfile: ../Dockerfile
+    ports:
+      - "9090:8080"
+    restart: always
+#    env_file: ./apps/.env

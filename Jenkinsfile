@@ -1,7 +1,7 @@
 def COLOR_MAP = ['SUCCESS': 'good', 'FAILURE': 'danger', 'UNSTABLE': 'danger', 'ABORTED': 'danger']
 
 pipeline {
-    agent any
+    agent { label 'docker-node-label' }
 
     tools {
         maven 'Maven'
@@ -47,6 +47,16 @@ pipeline {
                     repository: "${NexusRepo}",
                     version: "${env.NameFolder}"
                 }
+            }
+        }
+
+        stage('Deploy compose') {
+            steps {
+                sh '''
+                docker compose down
+                docker compose --project-name ${APP_NAME} build
+                docker compose up -d
+                '''
             }
         }
 
