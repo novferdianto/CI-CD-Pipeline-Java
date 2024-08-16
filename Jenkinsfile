@@ -39,9 +39,9 @@ pipeline {
                             type: 'war'
                         ]
                     ],
-                    credentialsId: 'Nexus',
+                    credentialsId: 'NEXUS',
                     groupId: "${GroupId}",
-                    nexusUrl: '13.215.12.135:8081',
+                    nexusUrl: '172.23.10.53:8081',
                     nexusVersion: 'nexus3',
                     protocol: 'http',
                     repository: "${NexusRepo}",
@@ -49,7 +49,7 @@ pipeline {
                 }
             }
         }
-
+        /*
         stage('Deploy to Docker') {
             steps {
                 echo 'Deploy to Docker'
@@ -85,9 +85,11 @@ pipeline {
     post {
         always {
             script {
-                def commit = sh(returnStdout: true, script: 'git log --format="%H%n%an%n%s" -n 1').trim().split('\n')
-                slackSend color: COLOR_MAP[currentBuild.currentResult], message: "*Build and deploy successful* :white_check_mark:\n\nJob: `${env.JOB_NAME}`\nBuild Number: *`<${env.BUILD_URL} |${env.BUILD_NUMBER}>`*\nCommit: `${commit[2]}`\nAuthor: `${commit[1]}`\nCommit ID: *`<https://github.com/mhviet2001/CI-CD-Pipeline-Java-WebApp/commit/${commit[1]} |${commit[0][0..6]}>`*", channel: '#general'
+                #def commit = sh(returnStdout: true, script: 'git log --format="%H%n%an%n%s" -n 1').trim().split('\n')
+                #slackSend color: COLOR_MAP[currentBuild.currentResult], message: "*Build and deploy successful* :white_check_mark:\n\nJob: `${env.JOB_NAME}`\nBuild Number: *`<${env.BUILD_URL} |${env.BUILD_NUMBER}>`*\nCommit: `${commit[2]}`\nAuthor: `${commit[1]}`\nCommit ID: *`<https://github.com/mhviet2001/CI-CD-Pipeline-Java-WebApp/commit/${commit[1]} |${commit[0][0..6]}>`*", channel: '#general'
+                sh 'echo "sukses"'
             }
         }
     }
+    */
 }
