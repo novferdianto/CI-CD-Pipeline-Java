@@ -54,7 +54,7 @@ pipeline {
             steps {
                 sh '''
                 docker compose down
-                docker compose --project-name ${APP_NAME} build
+                docker compose --project-name ${ArtifactId} build
                 docker compose up -d
                 '''
             }
