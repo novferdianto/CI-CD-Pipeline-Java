@@ -49,8 +49,8 @@ pipeline {
                 }
             }
         }
-        /*
-        stage('Deploy to Docker') {
+
+        /*stage('Deploy to Docker') {
             steps {
                 echo 'Deploy to Docker'
                 sshPublisher(
@@ -79,10 +79,10 @@ pipeline {
                     ]
                 )
             }
-        }
+        }*/
     }
 
-    post {
+    /*post {
         always {
             script {
                 #def commit = sh(returnStdout: true, script: 'git log --format="%H%n%an%n%s" -n 1').trim().split('\n')
@@ -90,6 +90,5 @@ pipeline {
                 sh 'echo "sukses"'
             }
         }
-    }
-    */
+    }*/
 }
